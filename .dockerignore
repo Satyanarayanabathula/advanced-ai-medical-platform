@@ -1,0 +1,13 @@
+.venv
+.git
+.gitignore
+.env
+__pycache__
+*.pyc
+
+notebooks
+tests
+
+data/*.db
+
+results/gradcam_api/*

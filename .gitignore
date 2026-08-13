@@ -1,0 +1,7 @@
+.env
+.secrets/
+.venv/
+__pycache__/
+*.pyc
+data/*.db
+results/gradcam_api/*
