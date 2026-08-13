@@ -1,3 +1,4 @@
+import logging
 from io import BytesIO
 from pathlib import Path
 from uuid import uuid4
@@ -17,7 +18,7 @@ from app.database.database import get_db
 from app.ml.gradcam_visualization import save_gradcam_overlay
 from app.ml.prediction_service import PredictionService
 from app.schemas.prediction import PredictionResponse
-
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/predict",
@@ -122,6 +123,14 @@ async def predict(
         )
 
     except Exception as exc:
+        logger.exception(
+            "Prediction pipeline failed for file '%s' "
+            "(content_type=%s): %s",
+            file.filename,
+            file.content_type,
+            exc,
+        )
+
         raise HTTPException(
             status_code=500,
             detail="Image analysis failed.",
