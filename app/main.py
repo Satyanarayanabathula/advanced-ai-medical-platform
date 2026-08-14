@@ -5,7 +5,10 @@ from fastapi.staticfiles import StaticFiles
 
 from app.api.routes_history import router as history_router
 from app.api.routes_prediction import router as prediction_router
+from app.database.database import Base, engine
+from app.database.models import Prediction
 
+Base.metadata.create_all(bind=engine)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
